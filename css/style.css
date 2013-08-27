@@ -1,0 +1,57 @@
+body {
+  background-color: white; }
+
+div {
+  margin: 30px auto;
+  padding: 2em 1em 0 1em;
+  color: #c6ffd3;
+  font-size: 1.5em;
+  text-align: center;
+  -webkit-transition: all 0.1s ease-out 0s;
+  -moz-transition: all 0.1s ease-out 0s;
+  -ms-transition: all 0.1s ease-out 0s;
+  -o-transition: all 0.1s ease-out 0s;
+  transition: all 0.1s ease-out 0s;
+  background: linear-gradient(135deg, #397151 0%, #397151 91.84%, rgba(57, 113, 81, 0.5) 91.84%, rgba(255, 255, 255, 0) 93.48%, rgba(255, 255, 255, 0) 100%);
+  width: 200px;
+  height: 200px;
+  position: relative;
+  border-radius: 0px;
+  background-size: 109%; }
+  div:after {
+    -webkit-transition: all 0.1s ease-out 0s;
+    -moz-transition: all 0.1s ease-out 0s;
+    -ms-transition: all 0.1s ease-out 0s;
+    -o-transition: all 0.1s ease-out 0s;
+    transition: all 0.1s ease-out 0s;
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    bottom: 0px;
+    right: 0px;
+    background: linear-gradient(-45deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0.5) 100%); }
+  div:hover {
+    -webkit-transition: all 0.1s ease-out 0s;
+    -moz-transition: all 0.1s ease-out 0s;
+    -ms-transition: all 0.1s ease-out 0s;
+    -o-transition: all 0.1s ease-out 0s;
+    transition: all 0.1s ease-out 0s;
+    background-size: 100%;
+    border-radius: 0; }
+  div:hover:after {
+    -webkit-transition: all 0.1s ease-out 0s;
+    -moz-transition: all 0.1s ease-out 0s;
+    -ms-transition: all 0.1s ease-out 0s;
+    -o-transition: all 0.1s ease-out 0s;
+    transition: all 0.1s ease-out 0s;
+    width: 40px;
+    height: 40px;
+    opacity: 1; }
+
+h1 {
+  font-size: 2em;
+  margin: 50px;
+  text-align: center;
+  color: #302e2d; }

@@ -1,0 +1,130 @@
+/////////////////
+// foldy.scss
+// created by Ilana Beer
+// July 18 2013
+// Thank you Kronia (http://kronia.com.au/blog/2013/05/curly-corner-css-effect/)*/
+/////////////////
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+// This mixin applies a fold effect to the bottom right corner of a div and is transparent underneath the folded corner. It accepts the following arguments:
+//  -time: this sets the transition time for the fold effect
+//  -width: sets the width of the element
+//  -height: sets the height of the element
+//  -boxColor: sets the color of the element
+//  -foldSize: sets the size of the fold as a fraction of the size of the shortest side of the box (use a decimal here)
+//  -startPos: this is a guess-and-check value. IMPORTANT: based on the size of the element and the foldSize this percentage will change. For a perfect square with a fold of 0.2, the startPos will be 80%.
+//  -shadow: this is either a 1 or 0 (as in true/false), indicating whether the fold is using a flat design or a more rounded, 3D effect.
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+@mixin foldy($time:0.2s, $width:200px, $height:200px, $boxColor:black, $foldSize:0.15, $startPos:80%, $shadow:1)
+{
+  @include allTransition($time);
+  @if($shadow == 1)
+      {
+        @include gradientBackground($startPos, $boxColor);
+      }
+      @else
+      {
+        background:linear-gradient(135deg, rgba($boxColor,1) 0%,rgba($boxColor,1) $startPos*1.12, rgba($boxColor,0.5) $startPos*1.12, rgba(255,255,255,0) $startPos*1.14,rgba(255,255,255,0) 100%);
+      }
+
+  width:$width;
+  height:$height;
+  position:relative;
+  border-radius:0px;
+
+  // Because the background gradient cannot have a transition effect (CSS3 gahh) I increased the size of the background to hide the opacity at the corner (thank you to http://sapphion.com/2011/10/css3-gradient-transition-with-background-position/ for helping me come up with that idea). For the 3D fold effect, the background contains a fairly large gradient area and needs to start off larger in order to hide the darker corner. For the flat design, since the border-radius doesn't change a background resize takes longer from 200% to 100% than from 110% to 100%. We need this and the actual appearance of the fold to transition in sync, which is why I check for which effect is to be used.
+  @if($shadow == 1)
+      {
+        background-size:200%;
+      }
+      @else
+      {
+          @if $width < $height {
+          background-size:100%+(100% - $startPos)/2;
+
+         } @else {
+          background-size:100%+(100% - $startPos)/2;
+         }
+      }
+
+
+  &:after{
+    @include allTransition($time);
+    opacity: 0;
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    bottom: 0px;
+    right: 0px;
+
+      @if($shadow == 1)
+      {
+      /*For the following gradient:
+      http://www.colorzilla.com/gradient-editor/#ffffff+0,4f4f4f+32,ffffff+55,ffffff+100&0+0,0+28,0.5+52,0.5+100;Custom*/
+      background: linear-gradient(-45deg, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,0.5) 52%,rgba(255,255,255,0.6) 55%,rgba(255,255,255,0.7) 100%);
+
+      }
+      @else
+      {
+      background: linear-gradient(-45deg, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 50%,rgba(255,255,255,0.5) 50%,rgba(255,255,255,0.5) 100%);
+      }
+    }
+
+  &:hover{
+
+    @include allTransition($time);
+    background-size:100%;
+
+    //curve the folded corner based on the provided fold size and width (the curve should be the0.15 as 4/3 of the width)
+    //Use the smaller of the width/height to ensure that the curve isnt larger than the element itself
+    @if($shadow == 1)
+      {
+      @if $width < $height {
+        border-radius:0px 0px 0.2*$width 0px;
+
+       } @else {
+        border-radius:0px 0px 0.2*$height 0px;
+       }
+
+    }
+    @else{
+      border-radius:0;
+    }
+
+  }
+
+  //determine the size of the square in the corner based on the provided fold size percentage and compared to width/height.
+  //Use the smaller of the two to ensure that the fold isnt larger than the element itself
+  &:hover:after{
+
+    @include allTransition($time);
+    @if $width < $height {
+      width: $foldSize*$width;
+      height: $foldSize*$width;
+
+     } @else {
+      width: $foldSize*$height;
+      height: $foldSize*$height;
+     }
+
+    opacity: 1;
+  }
+}
+
+//Transition time for all
+@mixin allTransition($time:0.2s, $delay:0s){
+  -webkit-transition: all $time ease-out $delay;
+  -moz-transition: all $time ease-out $delay;
+  -ms-transition: all $time ease-out $delay;
+  -o-transition: all $time ease-out $delay;
+  transition: all $time ease-out $delay;
+}
+
+//sets the background for the box itself to show on hover
+@mixin gradientBackground($startPos, $boxColor)
+{
+  background:linear-gradient(135deg, $boxColor 0%, $boxColor $startPos, darken($boxColor,15%) $startPos+9, lighten($boxColor,20%) $startPos+10, darken($boxColor,20%) $startPos+12);
+}
+

@@ -1,0 +1,22 @@
+
+@import "foldy";
+
+body{
+	background-color:white;
+}
+
+div{
+	margin:30px auto;
+	padding:2em 1em 0 1em;
+	color:#c6ffd3;
+	font-size: 1.5em;
+	text-align:center;
+	@include foldy(0.1s, 200px, 200px, #397151, 0.2, 82%, 0);
+}
+
+h1{
+	font-size:2em;
+	margin:50px;
+	text-align:center;
+	color:#302e2d;
+}
