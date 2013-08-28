@@ -10,7 +10,8 @@ INSTRUCTIONS:
 1) Add foldy.scss to the folder your SASS files are in
 
 2) Import foldy at the top of your .scss stylesheet
-	* ie: in style.scss, '@import "foldy";'
+
+ie: in style.scss, '@import "foldy";'
 
 3) Apply the fold to an element
 
