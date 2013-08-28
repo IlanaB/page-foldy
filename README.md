@@ -13,10 +13,11 @@ INSTRUCTIONS:
 	* ie: in style.scss, '@import "foldy";'
 
 3) Apply the fold to an element
-	* ie:
-		div{
-			@include foldy({time}, {width}, {height}, {color}, {fold size}, {start position}, {shadow});
-		}
+
+ie:
+    div{
+        @include foldy({time}, {width}, {height}, {color}, {fold size}, {start position}, {shadow});
+    }
 
 4) Arguments:
 * time: this sets the transition time for the fold effect
